@@ -1,33 +1,52 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8";
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link href="../css/EmpPayRoll.css" rel="stylesheet" >
-    </head>
-    <body>
-        <header class="header-content header">
-            <div class="logo-content">
-                <img src="../assests/logo.png" alt="logo">
-                <div>
-                    <span class="emp-text">EMPLOYEE</span><br>
-                    <span class="emp-text emp-payroll">PAYROLL</span>
-                </div>
+<head>
+    <meta charset="UTF-8" ; <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="../css/EmpPayRoll.css" rel="stylesheet">
+</head>
+<body>
+    <header class="header-content header">
+        <div class="logo-content">
+            <img src="../assests/logo.png" alt="logo">
+            <div>
+                <span class="emp-text">EMPLOYEE</span><br>
+                <span class="emp-text emp-payroll">PAYROLL</span>
             </div>
-        </header>
-        <!--UC 2 Form and Header-->
-        <div class="form-content">
-            <form class="form" action='#'
-            onsubmit="save();return false">
-            <div class="form-head" >
+        </div>
+    </header>
+    <!--UC 2 Form and Header-->
+    <div class="form-content">
+        <form class="form" action='#' onsubmit="save();return false">
+            <div class="form-head">
                 Employee Payroll form
             </div>
             <div class="row-content">
-                <label class="lable text"
-                for="name">Name</label>
+                <label class="lable text" for="name">Name</label>
                 <input class="input" type="text" id="name" name="name" placeholder="Your name.." required>
             </div>
+            <!--UC 3 : profile Pick option-->
+            <div class="row-content">
+                <label class="lable text" for="profile">Profile image</label>
+                <div class="profile-radio-content">
+                    <label>
+                        <input type="radio" id="profile1" name="profile" value="../assests/Ellipse -3.png" required>
+                        <img class="profile" id="image1" src="../assests/Ellipse -3.png">
+                    </label>
+                    <label>
+                        <input type="radio" id="profile2" name="profile" value="../assests/Ellipse 1.png" required>
+                        <img class="profile" id="image2" src="../assests/Ellipse 1.png">
+                    </label>
+                    <label>
+                        <input type="radio" id="profile3" name="profile" value="../assests/Ellipse -8.png" required>
+                        <img class="profile" id="image3" src="../assests/Ellipse -8.png">
+                    </label>
+                    <label>
+                        <input type="radio" id="profile4" name="profile" value="../assests/Ellipse -7.png" required>
+                        <img class="profile" id="image4" src="../assests/Ellipse -7.png">
+                    </label>
+                </div>
+            </div>
         </form>
-        </div>
-    </body>
+    </div>
+</body>
 </html>

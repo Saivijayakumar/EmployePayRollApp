@@ -42,6 +42,6 @@ class EmployeePayrollData {
         const options = { year: "numeric", month: "long", day: "numeric" };
         const empDate = this.startDate === undefined ? "undefined" :
             this.startDate.toLocaleDateString("en-US", options);
-        return "Name = " + this.name + " ProfilePic= " + this.profile + " gender = " + this.gender + " department = " + this.department + " salary = " + this.salary + " startDate= " + this.startDate + " note= " + this.note;
+        return "Name = " + this.name + " ProfilePic= " + this.profile + " gender = " + this.gender + " department = " + this.department + " salary = " + this.salary + " startDate= " + this.empDate + " note= " + this.note;
     }
 }

@@ -18,9 +18,9 @@
     </header>
     <!--UC 2 Form and Header-->
     <div class="form-content">
-        <form class="form" action='#' onsubmit="save();return false">
+        <form class="form" action='#' onsubmit="save()" onreset="restForm()">
             <div class="form-head">
-                Employee Payroll form
+                Employee Payroll Form
             </div>
             <div class="row-content">
                 <label class="lable text" for="name">Name</label>
@@ -157,5 +157,6 @@
         </form>
     </div>
     <script src="../js/EmpFormJS.js"></script>
+    <script src="../js/EmpGetSet.js"></script>
 </body>
 </html>

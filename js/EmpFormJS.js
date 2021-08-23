@@ -57,13 +57,12 @@ const createEmployeePayroll = () => {
     employeePayrollData.salary = getInputValueById('#salary');
     employeePayrollData.note = getInputValueById('#notes');
     let date = getInputValueById("#day") + " " + getInputValueById("#month") + " " + getInputValueById("#year");
-
     try {
         employeePayrollData.startDate = new Date(Date.parse(date));
-        setTextValue(".startDate-error", "");
     }
     catch (e) {
         setTextValue('.startDate-error', e);
+        throw e;
     }
     alert(employeePayrollData.toString());
     return employeePayrollData;

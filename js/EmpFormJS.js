@@ -13,7 +13,6 @@ window.addEventListener('DOMContentLoaded', (event) => {
             textError.textContent = e;
         }
     });
-
     const date = document.querySelector('#startDate');
     date.addEventListener('input', function () {
         let startDate = getInputValueById('#day') + " " + getInputValueById('#month') + " " + getInputValueById('#year');
@@ -25,8 +24,6 @@ window.addEventListener('DOMContentLoaded', (event) => {
             setTextValue('.startDate-error', e);
         }
     });
-
-
     const salary = document.querySelector('#salary');
     const salaryOutput = document.querySelector('.salary-output');
     salaryOutput.textContent = salary.value;
@@ -34,7 +31,6 @@ window.addEventListener('DOMContentLoaded', (event) => {
         salaryOutput.textContent = salary.value;
     });
 });
-
 const save = () => {
     try {
         let employeePayrollData = createEmployeePayroll();
@@ -44,7 +40,6 @@ const save = () => {
         return;
     }
 }
-
 function createAndUpdateStorage(employeePayrollData) {
     let employeePayrollList = JSON.parse(localStorage.getItem("EmployeePayrollList"));
     if (employeePayrollList != undefined) {
@@ -56,7 +51,6 @@ function createAndUpdateStorage(employeePayrollData) {
     alert(employeePayrollList.toString());
     localStorage.setItem("EmployeePayrollList", JSON.stringify(employeePayrollList));
 }
-
 const createEmployeePayroll = () => {
     let employeePayrollData = new EmployeePayrollData();
     try {
@@ -89,17 +83,14 @@ const getSelectedValues = (propertyValue) => {
     });
     return selItems;
 }
-
 const getInputValueById = (id) => {
     let value = document.querySelector(id).value;
     return value;
 }
-
 const setTextValue = (id, value) => {
     const element = document.querySelector(id);
     element.textContent = value;
 }
-
 const restForm = () => {
     setTextValue('#name', '');
     unsetSelectedValues('[name=profile');
@@ -112,14 +103,12 @@ const restForm = () => {
     setValue('#month', 'Jan');
     setValue('#year', '2021');
 }
-
 const unsetSelectedValues = (propertyValue) => {
     let allItems = document.querySelectorAll(propertyValue);
     allItems.forEach(item => {
         item.checked = false;
     });
 }
-
 const setValue = (id, value) => {
     const element = document.querySelector(id);
     element.value = value;

@@ -112,7 +112,7 @@ body {
 }
 
 td, th {
-    text-align: center;
+    text-align: left;
     padding: 5px 8px;
     /*border: 0px solid #dddddd;*/
 }
@@ -146,7 +146,7 @@ td:first-child {
 }
 
 td img:first-child {
-    margin-right: 10px;
+    margin-right: 20px;
 }
 
 td img {

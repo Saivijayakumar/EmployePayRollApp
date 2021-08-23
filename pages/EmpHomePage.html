@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8" ; <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link
-        href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,600;1,500&display=swap"rel="stylesheet">
+        href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,600;1,500&display=swap"
+        rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600&display=swap" rel="stylesheet">
     <title>Employee Payroll Home Page</title>
 </head>
@@ -24,8 +25,38 @@
                 Employee Details <div class="emp-count">10</div>
             </div>
             <a href="../pages/EmpForm.html" class="add-button">
-            <img src="../assests/homepage/add-24px.svg" alt="add user">Add User </a>
-        </div><!--Header count close-->
+                <img src="../assests/homepage/add-24px.svg" alt="add user">Add User </a>
+        </div>
+        <!--Header count close-->
+        <!----UC3 Display Employee Details in Tabular Format-->
+        <div class="table-main">
+            <table id="display" class="table">
+                <tr>
+                    <th></th>
+                    <th>Name</th>
+                    <th>Gender</th>
+                    <th>Department</th>
+                    <th>Salry</th>
+                    <th>Start Date</th>
+                    <th>Actions</th>
+                </tr>
+                <tr>
+                    <td><img class="profile" alt="Profileimge" src="../assests/Ellipse -8.png" ></td>
+                    <td>SaiVijaya</td>
+                    <td>Male</td>
+                    <td>
+                        <div class="dept-lable">HR</div>
+                        <div class="dept-lable">Finance</div>
+                    </td>
+                    <td>600000</td>
+                    <td>1 avg 2021</td>
+                    <td>
+                        <img id="1" onclick="remove(this)" alt="delete" src="../assests/homepage/delete-black-18dp.svg">
+                        <img id="1" onclick="update(this)" alt="Update" src="../assests/homepage/create-black-18dp.svg">
+                    </td>
+                </tr>
+            </table>
+        </div>
     </div>
     <link href="../css/EmpHome.css" rel="stylesheet">
 </body>

@@ -43,11 +43,25 @@ const getDeptHtml = (depList)=>{
 }
 //Deleteing employee when you click on delete in home page
 const remove = (node)=>{
+<<<<<<< HEAD
     let empPayrollData = empPayrollList.find(empData=>empData._name==node.id);
+=======
+    let empPayrollData = empPayrollList.find(empData=>empData._id==node.id);
+>>>>>>> UC24.StoreUpdateEmpToLoacal
     if(!empPayrollData) return;
     const index = empPayrollList.map(empData=>empData._name).indexOf(empPayrollData._name);
     empPayrollList.splice(index,1);
     localStorage.setItem('EmployeePayrollList',JSON.stringify(empPayrollList));
     document.querySelector(".emp-count").textContent = empPayrollList.length;
     createInnerHtml();
+<<<<<<< HEAD
+=======
+}
+//when click on update we will store that details into an object and send that obj to local storage
+const update = (node)=>{
+    let empPayrollData = empPayrollList.find(empData=>empData._id == node.id);
+    if(!empPayrollData) return;
+    localStorage.setItem('editEmp',JSON.stringify(empPayrollData));
+    window.location.replace(site_properties.Form_Page);
+>>>>>>> UC24.StoreUpdateEmpToLoacal
 }

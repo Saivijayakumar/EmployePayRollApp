@@ -25,8 +25,8 @@ const createInnerHtml = () => {
             <td>${empPayrollData._salary}</td>
             <td>${stringifyDate(empPayrollData._startDate)}</td>
             <td>
-            <img id="${empPayrollData._name}" onclick="remove(this)" alt="delete" src="../assests/homepage/delete-black-18dp.svg">
-            <img id="${empPayrollData._name}" onclick="update(this)" alt="Update" src="../assests/homepage/create-black-18dp.svg">
+            <img id="${empPayrollData._id}" onclick="remove(this)" alt="delete" src="../assests/homepage/delete-black-18dp.svg">
+            <img id="${empPayrollData._id}" onclick="update(this)" alt="Update" src="../assests/homepage/create-black-18dp.svg">
             </td>
         </tr>
         `;
@@ -43,7 +43,7 @@ const getDeptHtml = (depList)=>{
 }
 //Deleteing employee when you click on delete in home page
 const remove = (node)=>{
-    let empPayrollData = empPayrollList.find(empData=>empData._name==node.id);
+    let empPayrollData = empPayrollList.find(empData=>empData._id==node.id);
     if(!empPayrollData) return;
     const index = empPayrollList.map(empData=>empData._name).indexOf(empPayrollData._name);
     empPayrollList.splice(index,1);
@@ -53,7 +53,7 @@ const remove = (node)=>{
 }
 //when click on update we will store that details into an object and send that obj to local storage
 const update = (node)=>{
-    let empPayrollData = empPayrollList.find(empData=>empData._name == node.id);
+    let empPayrollData = empPayrollList.find(empData=>empData._id == node.id);
     if(!empPayrollData) return;
     localStorage.setItem('editEmp',JSON.stringify(empPayrollData));
     window.location.replace(site_properties.Form_Page);

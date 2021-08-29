@@ -1,7 +1,7 @@
 let empPayrollList;
 
 window.addEventListener('DOMContentLoaded', (event) => {
-    if (site_properties.use_Local_Storage.match("false"))
+    if (site_properties.use_Local_Storage.match("true"))
         getEmployeePayrollDataFromLocalStorage();
     else
         getEmployeePayrollDataFromServer();

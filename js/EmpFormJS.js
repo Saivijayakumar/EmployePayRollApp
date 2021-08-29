@@ -41,29 +41,52 @@ const save = (event) => {
     event.stopPropagation();
     try {
         setEmployeePayrollObject();
-        createAndUpdateStorage();
-        restForm();
-        window.location.replace(site_properties.home_page);
+        if (site_properties.use_Local_Storage.match("true")) {
+            createAndUpdateStorage();
+            restForm();
+            window.location.replace(site_properties.home_page);
+        }
+        else {
+            createOrUpdateEmployeePayroll();
+        }
     }
     catch (e) {
         return;
     }
 }
+//This for json server
+const createOrUpdateEmployeePayroll = () => {
+    let postURL = site_properties.server_Url;
+    let methodCall = "POST";
+    if (isUpdate) {
+        methodCall = "PUT";
+        postURL = postURL + employeePayrollObj.id.toString();
+    }
+    makeServiceCall(methodCall, postURL, true, employeePayrollObj)
+        .then(responseText => {
+            restForm();
+            window.location.replace(site_properties.home_page);
+        })
+        .catch(error => {
+            throw error;
+        });
+}
+
 //
-const createAndUpdateStorage =()=>{
+const createAndUpdateStorage = () => {
     let employeePayrollList = JSON.parse(localStorage.getItem("EmployeePayrollList"));
-    if(employeePayrollList){
-        let empPayrollData = employeePayrollList.find(empData=>empData.id == employeePayrollObj.id);
-        if(!empPayrollData){
+    if (employeePayrollList) {
+        let empPayrollData = employeePayrollList.find(empData => empData.id == employeePayrollObj.id);
+        if (!empPayrollData) {
             employeePayrollList.push(employeePayrollObj);
-        }else{
-            const index = employeePayrollList.map(empData=>empData.id).indexOf(empPayrollData.id);
-            employeePayrollList.splice(index,1,employeePayrollObj);
+        } else {
+            const index = employeePayrollList.map(empData => empData.id).indexOf(empPayrollData.id);
+            employeePayrollList.splice(index, 1, employeePayrollObj);
         }
-    }else{
+    } else {
         employeePayrollList = [employeePayrollObj];
     }
-    localStorage.setItem('EmployeePayrollList',JSON.stringify(employeePayrollList));
+    localStorage.setItem('EmployeePayrollList', JSON.stringify(employeePayrollList));
 }
 
 const getSelectedValues = (propertyValue) => {
@@ -141,18 +164,18 @@ const setSelectedValues = (propertyValue, value) => {
 }
 //storeing the data to local storage
 const setEmployeePayrollObject = () => {
-    if(!isUpdate)employeePayrollObj.id=createNewEmployeeId();
+    if (!isUpdate && site_properties.use_Local_Storage.match("true")) employeePayrollObj.id = createNewEmployeeId();
     employeePayrollObj._name = getInputValueById('#name');
-    employeePayrollObj._profile=getSelectedValues('[name=profile]').pop();
+    employeePayrollObj._profile = getSelectedValues('[name=profile]').pop();
     employeePayrollObj._gender = getSelectedValues('[name=gender]').pop();
-    employeePayrollObj._department=getSelectedValues('[name=department]');
+    employeePayrollObj._department = getSelectedValues('[name=department]');
     employeePayrollObj._salary = getInputValueById('#salary');
     employeePayrollObj._note = getInputValueById('#notes');
-    let date = getInputValueById('#day') +" "+getInputValueById('#month')+ " "+getInputValueById('#year');
+    let date = getInputValueById('#day') + " " + getInputValueById('#month') + " " + getInputValueById('#year');
     employeePayrollObj._startDate = date;
 }
 
-const createEmployeePayrollData = (id)=>{
+const createEmployeePayrollData = (id) => {
     let employeePayrollData = new EmployeePayrollData();
     if (!id) employeePayrollData.id = createNewEmployeeId();
     else employeePayrollData.id = id;
@@ -182,9 +205,9 @@ const setEmployeePayrollData = (employeePayrollData) => {
     alert(employeePayrollData.toString());
 }
 
-const createNewEmployeeId = () =>{
+const createNewEmployeeId = () => {
     let empID = localStorage.getItem("EmployeeID");
-    empID = !empID ? 1 : (parseInt(empID)+1).toString();
-    localStorage.setItem("EmployeeID",empID);
+    empID = !empID ? 1 : (parseInt(empID) + 1).toString();
+    localStorage.setItem("EmployeeID", empID);
     return empID;
 }

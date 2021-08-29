@@ -1,21 +1,41 @@
 let empPayrollList;
+
 window.addEventListener('DOMContentLoaded', (event) => {
-    empPayrollList = getEmployeePayrollDataFromLocalStorage();
+    if (site_properties.use_Local_Storage.match("false"))
+        getEmployeePayrollDataFromLocalStorage();
+    else
+        getEmployeePayrollDataFromServer();
+});
+const processEmployeePayrollDataResponse = () => {
     document.querySelector(".emp-count").textContent = empPayrollList.length;
     createInnerHtml();
     localStorage.removeItem('editEmp');
-});
+}
 
 const getEmployeePayrollDataFromLocalStorage = () => {
-    return localStorage.getItem('EmployeePayrollList') ? JSON.parse(localStorage.getItem('EmployeePayrollList')) : [];
+    empPayrollList = localStorage.getItem('EmployeePayrollList') ? JSON.parse(localStorage.getItem('EmployeePayrollList')) : [];
+    processEmployeePayrollDataResponse();
+}
+
+const getEmployeePayrollDataFromServer = () => {
+    makeServiceCall("GET",site_properties.server_Url, true)
+        .then(responseText => {
+            empPayrollList = JSON.parse(responseText);
+            processEmployeePayrollDataResponse();
+        })
+        .catch(error => {
+            console.log("GET Error status: " + JSON.stringify(error));
+            empPayrollList = [];
+            processEmployeePayrollDataResponse();
+        });
 }
 
 //Template literal ES6 feature
 const createInnerHtml = () => {
     const headerHtml = "<th></th><th>Name</th><th>Gender</th><th>Department</th><th>Salry</th><th>Start Date</th><th>Actions</th>";
-    if(empPayrollList.length == 0) return;
+    if (empPayrollList.length == 0) return;
     let innerHtml = `${headerHtml}`;
-    for(const empPayrollData of empPayrollList){
+    for (const empPayrollData of empPayrollList) {
         innerHtml = `${innerHtml}
         <tr>
             <td width="5%"><img class="profile" alt="Profileimge" src="${empPayrollData._profile}" ></td>
@@ -34,27 +54,27 @@ const createInnerHtml = () => {
     document.querySelector('#display-table').innerHTML = innerHtml;
 }
 
-const getDeptHtml = (depList)=>{
+const getDeptHtml = (depList) => {
     let deptHtml = '';
-    for(const dept of depList){
+    for (const dept of depList) {
         deptHtml = `${deptHtml} <div class='dept-lable'>${dept}</div>`
     }
     return deptHtml;
 }
 //Deleteing employee when you click on delete in home page
-const remove = (node)=>{
-    let empPayrollData = empPayrollList.find(empData=>empData.id==node.id);
-    if(!empPayrollData) return;
-    const index = empPayrollList.map(empData=>empData._name).indexOf(empPayrollData._name);
-    empPayrollList.splice(index,1);
-    localStorage.setItem('EmployeePayrollList',JSON.stringify(empPayrollList));
+const remove = (node) => {
+    let empPayrollData = empPayrollList.find(empData => empData.id == node.id);
+    if (!empPayrollData) return;
+    const index = empPayrollList.map(empData => empData._name).indexOf(empPayrollData._name);
+    empPayrollList.splice(index, 1);
+    localStorage.setItem('EmployeePayrollList', JSON.stringify(empPayrollList));
     document.querySelector(".emp-count").textContent = empPayrollList.length;
     createInnerHtml();
 }
 //when click on update we will store that details into an object and send that obj to local storage
-const update = (node)=>{
-    let empPayrollData = empPayrollList.find(empData=>empData.id == node.id);
-    if(!empPayrollData) return;
-    localStorage.setItem('editEmp',JSON.stringify(empPayrollData));
+const update = (node) => {
+    let empPayrollData = empPayrollList.find(empData => empData.id == node.id);
+    if (!empPayrollData) return;
+    localStorage.setItem('editEmp', JSON.stringify(empPayrollData));
     window.location.replace(site_properties.Form_Page);
 }

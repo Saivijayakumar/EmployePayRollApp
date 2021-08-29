@@ -18,7 +18,7 @@ const getEmployeePayrollDataFromLocalStorage = () => {
 }
 
 const getEmployeePayrollDataFromServer = () => {
-    makeServiceCall("GET",site_properties.server_Url, true)
+    makeServiceCall("GET", site_properties.server_Url, true)
         .then(responseText => {
             empPayrollList = JSON.parse(responseText);
             processEmployeePayrollDataResponse();
@@ -67,9 +67,22 @@ const remove = (node) => {
     if (!empPayrollData) return;
     const index = empPayrollList.map(empData => empData._name).indexOf(empPayrollData._name);
     empPayrollList.splice(index, 1);
-    localStorage.setItem('EmployeePayrollList', JSON.stringify(empPayrollList));
-    document.querySelector(".emp-count").textContent = empPayrollList.length;
-    createInnerHtml();
+    if (site_properties.use_Local_Storage.match("true")) {
+        localStorage.setItem('EmployeePayrollList', JSON.stringify(empPayrollList));
+        document.querySelector(".emp-count").textContent = empPayrollList.length;
+        createInnerHtml();
+    }
+    else {
+        const deleteURL = site_properties.server_Url + empPayrollData.id.toString();
+        makeServiceCall("DELETE", deleteURL, false)
+            .then(responseText => {
+                document.querySelector(".emp-count").textContent = empPayrollList.length;
+                createInnerHtml();
+            })
+            .catch(error => {
+                console.log("DELETE Error Status:" + JSON.stringify(error));
+            });
+    }
 }
 //when click on update we will store that details into an object and send that obj to local storage
 const update = (node) => {

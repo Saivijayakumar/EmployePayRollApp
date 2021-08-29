@@ -1,0 +1,41 @@
+{
+  "EmployeePayrollDB": [
+    {
+      "id": 1,
+      "_name": "Mark",
+      "_gender": "male",
+      "_department": [
+        "Finance"
+      ],
+      "_salary": "500000",
+      "_startDate": "27 Aug 2021",
+      "_note": "All In One",
+      "_profile": "../assests/Ellipse -3.png"
+    },
+    {
+      "_name": "Charan",
+      "_profile": "../assests/Ellipse -8.png",
+      "_gender": "female",
+      "_department": [
+        "Sales",
+        "Others"
+      ],
+      "_salary": "363000",
+      "_note": "slf",
+      "_startDate": "1 Aug 2021",
+      "id": 4
+    },
+    {
+      "_name": "FinalTest",
+      "_profile": "../assests/Ellipse -8.png",
+      "_gender": "male",
+      "_department": [
+        "Sales"
+      ],
+      "_salary": "457200",
+      "_note": "Last code",
+      "_startDate": "16 Aug 2021",
+      "id": 5
+    }
+  ]
+}
